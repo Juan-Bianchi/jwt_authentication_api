@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: jwt_authentication_api
+  datasource:
+      # H2 Database Configuration
+      url: jdbc:h2:mem:testdb
+      driverClassName: org.h2.Driver
+      username: sa
+      password: password
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+  h2:
+    console:
+      enabled: true
+security:
+  jwt:
+    secret: SecretKeyToGenJWTs
+    expiration: 86400000
+    tokenPrefix: Bearer
+    headerString: Authorization
