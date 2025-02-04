@@ -17,7 +17,5 @@ spring:
       enabled: true
 security:
   jwt:
-    secret: SecretKeyToGenJWTs
+    secret: SecretKeyToGenJWThj9yK5BD7FJL9GqCgWx1KqcRkE5=
     expiration: 86400000
-    tokenPrefix: Bearer
-    headerString: Authorization

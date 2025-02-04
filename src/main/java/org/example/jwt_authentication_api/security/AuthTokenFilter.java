@@ -55,16 +55,17 @@ public class AuthTokenFilter extends OncePerRequestFilter {
                     );
             authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
             SecurityContextHolder.getContext().setAuthentication(authentication);
-        } catch (Exception e) {
-            if(e instanceof JwtPersonalizedException) {
+        } catch (JwtPersonalizedException e) {
                 ExceptionDto responseBody = new ExceptionDto(e.getMessage());
-                response.setStatus(((JwtPersonalizedException) e).getStatusCode());
+                response.setStatus(e.getStatusCode());
                 response.getWriter().write(convertObjectToJson(responseBody));
 
                 return;
-            }
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            response.getWriter().write(convertObjectToJson(new ExceptionDto("Unauthorized")));
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            response.getWriter().write("INTERNAL SERVER ERROR");
+
+            return;
         }
         filterChain.doFilter(request, response);
     }

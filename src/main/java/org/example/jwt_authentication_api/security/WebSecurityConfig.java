@@ -55,8 +55,8 @@ public class WebSecurityConfig {
             )
             .authorizeHttpRequests(authorizeRequests ->
                     authorizeRequests
-                            .requestMatchers("/api/auth/**", "/api/test/all").permitAll()
-                            .requestMatchers("/h2-console/**").permitAll()
+                            .requestMatchers( "/api/test/all").permitAll()
+                            .requestMatchers("/h2-console/**", "/api/v1/auth/**").permitAll()
                             .anyRequest().authenticated()
             )
             // Disable frameOptions so h2-console can be accessed
